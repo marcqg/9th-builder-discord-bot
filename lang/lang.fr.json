@@ -186,7 +186,7 @@
             "translators": "[TranslatorName#1234](https://github.com/)"
         },
         "bot": {
-            "description": "{{REF:links.templateEmbed}} aide à donner aux développeurs un point de départ pour les nouveaux bots Discord, afin que la plupart des configurations initiales puissent être évitées et que les développeurs puissent se concentrer sur des fonctionnalités significatives pour le bot."
+            "description": "{{REF:links.templateEmbed}} aide les joueurs à préparer leurs parties, rechercher dans les règles de chaque jeux disponible sur le 9thBuilder"
         },
         "chatCommands": {
             "dev": "dev",

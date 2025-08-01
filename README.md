@@ -1,19 +1,20 @@
-# Discord Bot TypeScript Template
+# 9thBuilder Discord Bot
 
 [![discord.js](https://img.shields.io/github/package-json/dependency-version/KevinNovak/Discord-Bot-TypeScript-Template/discord.js)](https://discord.js.org/)
 [![License](https://img.shields.io/badge/license-MIT-blue)](https://opensource.org/licenses/MIT)
-[![Stars](https://img.shields.io/github/stars/KevinNovak/Discord-Bot-TypeScript-Template.svg)](https://github.com/KevinNovak/Discord-Bot-TypeScript-Template/stargazers)
 [![Pull Requests](https://img.shields.io/badge/Pull%20Requests-Welcome!-brightgreen)](https://github.com/KevinNovak/Discord-Bot-TypeScript-Template/pulls)
 
-**Discord bot** - A discord.js bot template written with TypeScript.
+
+**Discord bot** - A discord.js bot writted to use Lexicon and feature from the 9thBuilder.
+from [Discord-Bot-TypeScript-Template](https://github.com/KevinNovak/Discord-Bot-TypeScript-Template)
 
 ## Introduction
 
-This template was created to give developers a starting point for new Discord bots, so that much of the initial setup can be avoided and developers can instead focus on meaningful bot features. Developers can simply copy this repo, follow the [setup instructions](#setup) below, and have a working bot with many [boilerplate features](#features) already included!
+This bot is created to give each players a bot to help them from before to after ther games!
 
-For help using this template, feel free to [join our support server](https://discord.gg/c9kQktCbsE)!
+For help using this Bot, feel free to [join our support server](https://discord.gg/PA7tk3rJaT)!
 
-[![Discord Shield](https://discord.com/api/guilds/660711235766976553/widget.png?style=shield)](https://discord.gg/c9kQktCbsE)
+[![Discord Shield](https://discord.com/api/guilds/1023927656527450134/widget.png?style=shield)](https://discord.gg/PA7tk3rJaT)
 
 ## Features
 
@@ -25,20 +26,6 @@ For help using this template, feel free to [join our support server](https://dis
 - Shows server count in bot status.
 - Posts server count to popular bot list websites.
 - Support for multiple languages.
-
-### Developer Friendly:
-
-- Written with TypeScript.
-- Uses the [discord.js](https://discord.js.org/) framework.
-- Built-in debugging setup for VSCode.
-- Written with [ESM](https://nodejs.org/api/esm.html#introduction) for future compatibility with packages.
-- Support for running with the [PM2](https://pm2.keymetrics.io/) process manger.
-- Support for running with [Docker](https://www.docker.com/).
-
-### Scales as Your Bot Grows:
-
-- Supports [sharding](https://discordjs.guide/sharding/) which is required when your bot is in 2500+ servers.
-- Supports [clustering](https://github.com/KevinNovak/Discord-Bot-TypeScript-Template-Master-Api) which allows you to run your bot on multiple machines.
 
 ## Commands
 
