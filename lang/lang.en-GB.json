@@ -183,7 +183,7 @@
     },
     "refs": {
         "meta": {
-            "translators": "[TranslatorName#1234](https://github.com/), French translation by Guillaume"
+            "translators": "[TranslatorName#1234](https://github.com/)"
         },
         "bot": {
             "description": "{{REF:links.templateEmbed}} helps players prepare their games, search through the rules of each game available on 9thBuilder"

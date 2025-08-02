@@ -1,7 +1,7 @@
 {
     "name": "my-bot",
     "version": "1.0.0",
-    "author": "Kevin Novak",
+    "author": "Guillaume Marcq",
     "description": "A discord.js bot template written with TypeScript",
     "license": "MIT",
     "private": true,
