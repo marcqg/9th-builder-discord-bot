@@ -1,0 +1,26 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+    env:
+      SCALEWAY_CONTAINER_URL: ${{ secrets.SCALEWAY_CONTAINER_URL }}
+      SCALEWAY_CONTAINER_ID: ${{ secrets.SCALEWAY_CONTAINER_ID }}
+      CONTAINER_NAME: ${{ env.CONTAINER_NAME }}
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Docker login
+      run: echo "${{ secrets.SCALEWAY_TOKEN }}" | docker login "${{ SCALEWAY_CONTAINER_URL }}/${{ SCALEWAY_CONTAINER_ID }}" -u nologin --password-stdin
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag "${{ SCALEWAY_CONTAINER_URL }}/${{ SCALEWAY_CONTAINER_ID }}/${{ CONTAINER_NAME }}:latest" --platform=linux/amd64
+    - name: Push to Container Registry
+      run: docker push "${{ SCALEWAY_CONTAINER_URL }}/${{ SCALEWAY_CONTAINER_ID }}/${{ CONTAINER_NAME }}:latest"
