@@ -14,13 +14,13 @@ jobs:
     env:
       SCALEWAY_CONTAINER_URL: ${{ secrets.SCALEWAY_CONTAINER_URL }}
       SCALEWAY_CONTAINER_ID: ${{ secrets.SCALEWAY_CONTAINER_ID }}
-      CONTAINER_NAME: ${{ env.CONTAINER_NAME }}
+      CONTAINER_NAME: ${{ vars.CONTAINER_NAME }}
 
     steps:
     - uses: actions/checkout@v4
     - name: Docker login
-      run: echo "${{ secrets.SCALEWAY_TOKEN }}" | docker login "${{ SCALEWAY_CONTAINER_URL }}/${{ SCALEWAY_CONTAINER_ID }}" -u nologin --password-stdin
+      run: echo "${{ secrets.SCALEWAY_TOKEN }}" | docker login "${{ env.SCALEWAY_CONTAINER_URL }}/${{ env.SCALEWAY_CONTAINER_ID }}" -u nologin --password-stdin
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag "${{ SCALEWAY_CONTAINER_URL }}/${{ SCALEWAY_CONTAINER_ID }}/${{ CONTAINER_NAME }}:latest" --platform=linux/amd64
+      run: docker build . --file Dockerfile --tag "${{ env.SCALEWAY_CONTAINER_URL }}/${{ env.SCALEWAY_CONTAINER_ID }}/${{ env.CONTAINER_NAME }}:latest" --platform=linux/amd64
     - name: Push to Container Registry
-      run: docker push "${{ SCALEWAY_CONTAINER_URL }}/${{ SCALEWAY_CONTAINER_ID }}/${{ CONTAINER_NAME }}:latest"
+      run: docker push "${{ env.SCALEWAY_CONTAINER_URL }}/${{ env.SCALEWAY_CONTAINER_ID }}/${{ env.CONTAINER_NAME }}:latest"
