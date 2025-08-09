@@ -21,8 +21,8 @@ jobs:
     - name: Copy config file templates
       run: |
         cp config/config.example.json config/config.json
+        cp config/debug.example.json config/debug.json
         echo '[]' > config/bot-sites.json
-        echo '{}' > config/debug.json
     - name: Setup config files
       run: |
         sed -i "s|<YOUR_DISCORD_ID>|${{ secrets.DISCORD_DEVELOPER_ID }}|g" config/config.json
