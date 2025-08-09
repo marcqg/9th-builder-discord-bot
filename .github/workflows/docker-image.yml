@@ -11,6 +11,7 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    environment: "production"
     env:
       SCALEWAY_CONTAINER_URL: ${{ secrets.SCALEWAY_CONTAINER_URL }}
       SCALEWAY_CONTAINER_ID: ${{ secrets.SCALEWAY_CONTAINER_ID }}
