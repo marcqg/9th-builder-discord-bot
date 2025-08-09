@@ -7,10 +7,8 @@ on:
     branches: [ "master" ]
 
 jobs:
-  JOB-ID:
+  build-docker:
     environment: production
-
-  build:
 
     runs-on: ubuntu-latest
     env:
