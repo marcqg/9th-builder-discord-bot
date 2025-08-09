@@ -59,6 +59,13 @@ async function start(): Promise<void> {
         shardList,
     });
 
+    shardManager.on('shardCreate', async (shard) => {
+      console.log('Shard Launched')
+      shard.on('error', (error) => {
+        console.error(error)
+      })
+    })
+
     // Jobs
     let jobs: Job[] = [
         Config.clustering.enabled ? undefined : new UpdateServerCountJob(shardManager, httpService),
