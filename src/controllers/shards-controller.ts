@@ -25,7 +25,62 @@ export class ShardsController implements Controller {
     constructor(private shardManager: ShardingManager) {}
 
     public register(): void {
+        /**
+         * @swagger
+         * /shards:
+         *   get:
+         *     summary: Get shard information
+         *     description: Retrieve information about all shards including status and statistics
+         *     tags: [Shards]
+         *     security:
+         *       - ApiKeyAuth: []
+         *     responses:
+         *       200:
+         *         description: Shard information and statistics
+         *         content:
+         *           application/json:
+         *             schema:
+         *               $ref: '#/components/schemas/GetShardsResponse'
+         *       401:
+         *         description: Unauthorized
+         *         content:
+         *           application/json:
+         *             schema:
+         *               $ref: '#/components/schemas/ErrorResponse'
+         */
         this.router.get('/', (req, res) => this.getShards(req, res));
+
+        /**
+         * @swagger
+         * /shards/presence:
+         *   put:
+         *     summary: Set shard presences
+         *     description: Update the presence/activity status of all shards
+         *     tags: [Shards]
+         *     security:
+         *       - ApiKeyAuth: []
+         *     requestBody:
+         *       required: true
+         *       content:
+         *         application/json:
+         *           schema:
+         *             $ref: '#/components/schemas/SetShardPresencesRequest'
+         *     responses:
+         *       200:
+         *         description: Presence updated successfully
+         *       400:
+         *         description: Validation error
+         *         content:
+         *           application/json:
+         *             schema:
+         *               $ref: '#/components/schemas/ErrorResponse'
+         *       401:
+         *         description: Unauthorized
+         *         content:
+         *           application/json:
+         *             schema:
+         *               $ref: '#/components/schemas/ErrorResponse'
+         */
         this.router.put('/presence', mapClass(SetShardPresencesRequest), (req, res) =>
             this.setShardPresences(req, res)
         );
