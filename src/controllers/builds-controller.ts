@@ -13,6 +13,39 @@ export class BuildsController implements Controller {
     public router: Router = Router();
 
     public register(): void {
+        /**
+         * @swagger
+         * /builds:
+         *   post:
+         *     summary: Declare a new build
+         *     description: Declare a new build with URL, message, and filename
+         *     tags: [Builds]
+         *     requestBody:
+         *       required: true
+         *       content:
+         *         application/json:
+         *           schema:
+         *             $ref: '#/components/schemas/BuildDeclaration'
+         *     responses:
+         *       201:
+         *         description: Build declared successfully
+         *         content:
+         *           application/json:
+         *             schema:
+         *               $ref: '#/components/schemas/BuildResponse'
+         *       400:
+         *         description: Validation error
+         *         content:
+         *           application/json:
+         *             schema:
+         *               $ref: '#/components/schemas/ErrorResponse'
+         *       500:
+         *         description: Internal server error
+         *         content:
+         *           application/json:
+         *             schema:
+         *               $ref: '#/components/schemas/ErrorResponse'
+         */
         this.router.post('/', (req, res) => this.declareBuild(req, res));
     }
 

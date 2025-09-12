@@ -7,6 +7,21 @@ export class RootController implements Controller {
     public router: Router = Router();
 
     public register(): void {
+        /**
+         * @swagger
+         * /:
+         *   get:
+         *     summary: Get API information
+         *     description: Returns basic information about the API
+         *     tags: [General]
+         *     responses:
+         *       200:
+         *         description: API information
+         *         content:
+         *           application/json:
+         *             schema:
+         *               $ref: '#/components/schemas/ApiInfo'
+         */
         this.router.get('/', (req, res) => this.get(req, res));
     }
 

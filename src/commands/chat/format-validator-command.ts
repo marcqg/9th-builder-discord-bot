@@ -12,7 +12,7 @@ export class FormatValidatorCommand implements Command {
     public deferType = CommandDeferType.PUBLIC;
     public requireClientPerms: PermissionsString[] = ['SendMessages'];
 
-    public async execute(intr: ChatInputCommandInteraction, _data: EventData): Promise<void> {
+    public async execute(intr: ChatInputCommandInteraction, data: EventData): Promise<void> {
         // Only allow usage in guild channels
         if (!intr.guild || !intr.channel) {
             await InteractionUtils.send(

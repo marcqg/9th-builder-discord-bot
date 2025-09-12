@@ -190,6 +190,7 @@
         },
         "chatCommands": {
             "dev": "dev",
+            "formatValidator": "format-validator",
             "help": "help",
             "info": "info",
             "test": "test"
@@ -206,14 +207,18 @@
         },
         "commandDescs": {
             "dev": "Developer use only.",
+            "formatValidator": "Manage message format validation in channels.",
             "help": "Find help or contact support.",
             "info": "View bot info.",
             "test": "Run the test command."
         },
         "argDescs": {
-            "devCommand": "Command.",
-            "helpOption": "Option.",
-            "infoOption": "Option."
+          "devCommand": "Command.",
+          "formatValidatorCommand": "Command.",
+          "formatValidatorPattern": "Regular expression pattern that messages must match.",
+          "formatValidatorErrorMessage": "Error message shown when messages don't match the pattern.",
+          "helpOption": "Option.",
+          "infoOption": "Option."
         },
         "fields": {
             "commands": "Commands",
@@ -273,6 +278,16 @@
         },
         "devCommandNames": {
             "info": "info"
+        },
+        "formatValidatorCommandNames": {
+          "enable": "enable",
+          "disable": "disable",
+          "status": "status"
+        },
+        "formatValidatorCommandDescs": {
+          "enable": "Enable message format validation in the current channel.",
+          "disable": "Disable message format validation in the current channel.",
+          "status": "Check if message format validation is active in the current channel."
         },
         "helpOptions": {
             "contactSupport": "Contact Support",

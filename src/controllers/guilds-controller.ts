@@ -16,6 +16,29 @@ export class GuildsController implements Controller {
     constructor(private shardManager: ShardingManager) {}
 
     public register(): void {
+        /**
+         * @swagger
+         * /guilds:
+         *   get:
+         *     summary: Get all guilds
+         *     description: Retrieve a list of all Discord guild IDs the bot is connected to
+         *     tags: [Guilds]
+         *     security:
+         *       - ApiKeyAuth: []
+         *     responses:
+         *       200:
+         *         description: List of guild IDs
+         *         content:
+         *           application/json:
+         *             schema:
+         *               $ref: '#/components/schemas/GetGuildsResponse'
+         *       401:
+         *         description: Unauthorized
+         *         content:
+         *           application/json:
+         *             schema:
+         *               $ref: '#/components/schemas/ErrorResponse'
+         */
         this.router.get('/', (req, res) => this.getGuilds(req, res));
     }
 
