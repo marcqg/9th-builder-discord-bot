@@ -1,6 +1,6 @@
 import { APIApplicationCommandBasicOption, ApplicationCommandOptionType } from 'discord.js';
 
-import { DevCommandName, HelpOption, InfoOption } from '../enums/index.js';
+import { DevCommandName, FormatValidatorCommandName, HelpOption, InfoOption } from '../enums/index.js';
 import { Language } from '../models/enum-helpers/index.js';
 import { Lang } from '../services/index.js';
 
@@ -54,6 +54,31 @@ export class Args {
                 name: Lang.getRef('infoOptions.translate', Language.Default),
                 name_localizations: Lang.getRefLocalizationMap('infoOptions.translate'),
                 value: InfoOption.TRANSLATE,
+            },
+        ],
+    };
+
+    public static readonly FORMAT_VALIDATOR_COMMAND: APIApplicationCommandBasicOption = {
+        name: Lang.getRef('arguments.command', Language.Default),
+        name_localizations: Lang.getRefLocalizationMap('arguments.command'),
+        description: Lang.getRef('argDescs.formatValidatorCommand', Language.Default),
+        description_localizations: Lang.getRefLocalizationMap('argDescs.formatValidatorCommand'),
+        type: ApplicationCommandOptionType.String,
+        choices: [
+            {
+                name: Lang.getRef('formatValidatorCommandDescs.enable', Language.Default),
+                name_localizations: Lang.getRefLocalizationMap('formatValidatorCommandDescs.enable'),
+                value: FormatValidatorCommandName.ENABLE,
+            },
+            {
+                name: Lang.getRef('formatValidatorCommandDescs.disable', Language.Default),
+                name_localizations: Lang.getRefLocalizationMap('formatValidatorCommandDescs.disable'),
+                value: FormatValidatorCommandName.DISABLE,
+            },
+            {
+                name: Lang.getRef('formatValidatorCommandDescs.status', Language.Default),
+                name_localizations: Lang.getRefLocalizationMap('formatValidatorCommandDescs.status'),
+                value: FormatValidatorCommandName.STATUS,
             },
         ],
     };

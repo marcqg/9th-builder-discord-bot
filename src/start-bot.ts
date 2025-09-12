@@ -1,9 +1,11 @@
 import { REST } from '@discordjs/rest';
 import { Options, Partials } from 'discord.js';
 import { createRequire } from 'node:module';
+import fs from 'node:fs';
+import path from 'node:path';
 
 import { Button } from './buttons/index.js';
-import { DevCommand, HelpCommand, InfoCommand, TestCommand } from './commands/chat/index.js';
+import { DevCommand, FormatValidatorCommand, HelpCommand, InfoCommand, TestCommand } from './commands/chat/index.js';
 import {
     ChatCommandMetadata,
     Command,
@@ -31,11 +33,22 @@ import {
     JobService,
     Logger,
 } from './services/index.js';
-import { Trigger } from './triggers/index.js';
+import { FormatValidatorTrigger, Trigger } from './triggers/index.js';
 
 const require = createRequire(import.meta.url);
 let Config = require('../config/config.json');
 let Logs = require('../lang/logs.json');
+
+// Load format validator config if it exists
+let formatValidatorConfig = { formatRules: [] };
+const formatValidatorConfigPath = path.resolve('./config/format-validator.json');
+if (fs.existsSync(formatValidatorConfigPath)) {
+    try {
+        formatValidatorConfig = require('../config/format-validator.json');
+    } catch (error) {
+        Logger.warn('Failed to load format validator config. Format validation will be disabled.');
+    }
+}
 
 async function start(): Promise<void> {
     // Services
@@ -58,6 +71,7 @@ async function start(): Promise<void> {
     let commands: Command[] = [
         // Chat Commands
         new DevCommand(),
+        new FormatValidatorCommand(),
         new HelpCommand(),
         new InfoCommand(),
         new TestCommand(),
@@ -83,7 +97,8 @@ async function start(): Promise<void> {
 
     // Triggers
     let triggers: Trigger[] = [
-        // TODO: Add new triggers here
+        // Create format validator trigger
+        new FormatValidatorTrigger()
     ];
 
     // Event handlers

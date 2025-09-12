@@ -55,6 +55,42 @@
 			]
 		},
 		{
+			"name": "Builds",
+			"item": [
+				{
+					"name": "Declare Build",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"url\": \"https://example.com/my-build.zip\",\n    \"message\": \"Nouveau build version 1.2.3 avec corrections de bugs\",\n    \"filename\": \"build-v1.2.3.zip\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/builds",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"builds"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Guilds",
 			"item": [
 				{
