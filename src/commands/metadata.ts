@@ -8,7 +8,6 @@ import {
 } from 'discord.js';
 
 import { Args } from './index.js';
-import { FormatValidatorCommandName } from '../enums/index.js';
 import { Language } from '../models/enum-helpers/index.js';
 import { Lang } from '../services/index.js';
 

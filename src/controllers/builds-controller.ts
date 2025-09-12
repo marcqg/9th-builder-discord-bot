@@ -70,7 +70,7 @@ export class BuildsController implements Controller {
                 data: buildData
             });
 
-        } catch (error) {
+        } catch {
             res.status(500).json({
                 error: 'Erreur interne du serveur lors de la déclaration du build'
             });

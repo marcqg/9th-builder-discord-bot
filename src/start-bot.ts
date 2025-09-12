@@ -1,7 +1,7 @@
 import { REST } from '@discordjs/rest';
 import { Options, Partials } from 'discord.js';
-import { createRequire } from 'node:module';
 import fs from 'node:fs';
+import { createRequire } from 'node:module';
 import path from 'node:path';
 
 import { Button } from './buttons/index.js';
@@ -45,7 +45,7 @@ const formatValidatorConfigPath = path.resolve('./config/format-validator.json')
 if (fs.existsSync(formatValidatorConfigPath)) {
     try {
         formatValidatorConfig = require('../config/format-validator.json');
-    } catch (error) {
+    } catch {
         Logger.warn('Failed to load format validator config. Format validation will be disabled.');
     }
 }
