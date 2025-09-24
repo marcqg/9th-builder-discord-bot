@@ -44,7 +44,7 @@ export class SwaggerController implements Controller {
                 },
                 servers: [
                     {
-                        url: `https://example.com/`,
+                        url: `http://localhost:3001/`,
                         description: 'Development server'
                     }
                 ],

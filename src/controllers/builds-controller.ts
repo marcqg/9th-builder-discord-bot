@@ -1,6 +1,11 @@
+import { EmbedBuilder, ShardingManager } from 'discord.js';
 import { Request, Response, Router } from 'express';
+import { createRequire } from 'node:module';
 
 import { Controller } from './index.js';
+
+const require = createRequire(import.meta.url);
+let Config = require('../../config/config.json');
 
 export interface BuildDeclaration {
     url: string;
@@ -11,6 +16,8 @@ export interface BuildDeclaration {
 export class BuildsController implements Controller {
     public path = '/builds';
     public router: Router = Router();
+
+    constructor(private shardManager?: ShardingManager) {}
 
     public register(): void {
         /**
@@ -85,10 +92,7 @@ export class BuildsController implements Controller {
                 return;
             }
 
-            // Ici vous pouvez ajouter la logique pour traiter la déclaration du build
-            // Par exemple : sauvegarder en base de données, envoyer une notification, etc.
-            
-            // Pour l'instant, on retourne simplement les données reçues
+            // Créer les données du build
             const buildData = {
                 id: Date.now(), // ID temporaire basé sur le timestamp
                 url: url.trim(),
@@ -96,6 +100,16 @@ export class BuildsController implements Controller {
                 filename: filename.trim(),
                 createdAt: new Date().toISOString()
             };
+
+            // Envoyer la notification Discord si configurée
+            if (Config.notifications?.builds?.enabled && this.shardManager) {
+                try {
+                    await this.sendDiscordNotification(buildData);
+                } catch (error) {
+                    console.error('Erreur lors de l\'envoi de la notification Discord:', error);
+                    // Ne pas faire échouer la requête si la notification échoue
+                }
+            }
 
             res.status(201).json({
                 success: true,
@@ -107,6 +121,53 @@ export class BuildsController implements Controller {
             res.status(500).json({
                 error: 'Erreur interne du serveur lors de la déclaration du build'
             });
+        }
+    }
+
+    private async sendDiscordNotification(buildData: any): Promise<void> {
+        if (!this.shardManager || !Config.notifications?.builds?.channelIds) {
+            return;
+        }
+
+        const channelIds = Config.notifications.builds.channelIds as string[];
+        
+        // Créer un embed Discord pour la notification
+        const embed = new EmbedBuilder()
+            .setTitle('🔨 New Build Available')
+            .setDescription(buildData.message)
+            .setColor(0x00FF00) // Vert pour succès
+            .addFields([
+                {
+                    name: '📄 File',
+                    value: buildData.filename,
+                    inline: true
+                },
+                {
+                    name: '🔗 URL',
+                    value: `[Télécharger](${buildData.url})`,
+                    inline: true
+                },
+                {
+                    name: '⏰ Created at',
+                    value: `<t:${Math.floor(new Date(buildData.createdAt).getTime() / 1000)}:F>`,
+                    inline: false
+                }
+            ])
+            .setTimestamp()
+            .setFooter({ text: 'Build Notification System' });
+
+        // Envoyer le message via le shardManager
+        for(const channelId of channelIds) {
+            await this.shardManager.broadcastEval(
+                (client, { channelId, embedData }) => {
+                    const channel = client.channels.cache.get(channelId);
+                    if (channel && channel.isTextBased()) {
+                        return (channel as any).send({ embeds: [embedData] });
+                    }
+                    return null;
+                },
+                { context: { channelId, embedData: embed.toJSON() } }
+            );
         }
     }
 }
