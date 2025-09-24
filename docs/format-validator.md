@@ -12,7 +12,7 @@ Use the `/format-validator` command in the channel where you want to enforce mes
 
 For example:
 ```
-/format-validator command:enable pattern:"^\[.+\] .+$" error_message:"Votre message ne suit pas le format requis. Les messages dans ce channel doivent commencer par un texte entre crochets, par exemple: [Sujet] Mon message"
+/format-validator command:enable pattern:"^\[.+\] .+$" error_message:"Your message does not follow the required format. Messages in this channel must start with text in brackets, for example: [Subject] My message"
 ```
 
 ## Command Options
