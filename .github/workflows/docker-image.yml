@@ -29,6 +29,7 @@ jobs:
         sed -i "s|<DISCORD_BOT_ID>|${{ secrets.DISCORD_BOT_ID }}|g" config/config.json
         sed -i "s|<DISCORD_BOT_TOKEN>|${{ secrets.DISCORD_BOT_TOKEN }}|g" config/config.json
         sed -i 's|"00000000-0000-0000-0000-000000000000"|"${{ secrets.API_SECRET }}"|g' config/config.json
+        sed -i 's|<DISCORD_NOTIFICATION_CHANNEL_ID>>|${{ vars.DISCORD_NOTIFICATION_CHANNEL_ID }}|g' config/config.json
     - name: Docker login
       run: docker login "${{ env.SCALEWAY_CONTAINER_URL }}/${{ env.SCALEWAY_CONTAINER_ID }}" -u nologin --password-stdin <<< "${{ secrets.SCALEWAY_TOKEN }}"
     - name: Build the Docker image

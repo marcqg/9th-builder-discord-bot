@@ -75,7 +75,7 @@ async function start(): Promise<void> {
     const manager = new Manager(shardManager, new JobService(jobs));
 
     // API
-    const buildsController = new BuildsController();
+    const buildsController = new BuildsController(shardManager);
     const guildsController = new GuildsController(shardManager);
     const shardsController = new ShardsController(shardManager);
     const rootController = new RootController();
