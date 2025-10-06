@@ -4,12 +4,15 @@ on:
   push:
     branches:
       - main
-    paths: 
+    paths:
       - 'swagger/**'
 
 jobs:
   upload-openapi-spec:
+    environment: production
+
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
