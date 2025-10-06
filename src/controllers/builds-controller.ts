@@ -16,6 +16,7 @@ export interface BuildDeclaration {
 export class BuildsController implements Controller {
     public path = '/builds';
     public router: Router = Router();
+    public authToken: string = Config.api.secret;
 
     constructor(private shardManager?: ShardingManager) {}
 
@@ -27,6 +28,8 @@ export class BuildsController implements Controller {
          *     summary: Declare a new build
          *     description: Declare a new build with URL, message, and filename
          *     tags: [Builds]
+         *     security:
+         *       - ApiKeyAuth: []
          *     requestBody:
          *       required: true
          *       content:
@@ -60,66 +63,66 @@ export class BuildsController implements Controller {
         try {
             const { url, message, filename }: BuildDeclaration = req.body;
 
-            // Validation des paramètres requis
+            // Required parameters validation
             if (!url || typeof url !== 'string') {
                 res.status(400).json({ 
-                    error: 'Le paramètre "url" est requis et doit être une chaîne de caractères' 
+                    error: 'The "url" parameter is required and must be a string'
                 });
                 return;
             }
 
             if (!message || typeof message !== 'string') {
                 res.status(400).json({ 
-                    error: 'Le paramètre "message" est requis et doit être une chaîne de caractères' 
+                    error: 'The "message" parameter is required and must be a string'
                 });
                 return;
             }
 
             if (!filename || typeof filename !== 'string') {
                 res.status(400).json({ 
-                    error: 'Le paramètre "filename" est requis et doit être une chaîne de caractères' 
+                    error: 'The "filename" parameter is required and must be a string'
                 });
                 return;
             }
 
-            // Validation basique de l'URL
+            // Basic URL validation
             try {
                 new URL(url);
             } catch {
                 res.status(400).json({ 
-                    error: 'Le paramètre "url" doit être une URL valide' 
+                    error: 'The "url" parameter must be a valid URL'
                 });
                 return;
             }
 
-            // Créer les données du build
+            // Create build data
             const buildData = {
-                id: Date.now(), // ID temporaire basé sur le timestamp
+                id: Date.now(), // Temporary ID based on timestamp
                 url: url.trim(),
                 message: message.trim(),
                 filename: filename.trim(),
                 createdAt: new Date().toISOString()
             };
 
-            // Envoyer la notification Discord si configurée
+            // Send Discord notification if configured
             if (Config.notifications?.builds?.enabled && this.shardManager) {
                 try {
                     await this.sendDiscordNotification(buildData);
                 } catch (error) {
-                    console.error('Erreur lors de l\'envoi de la notification Discord:', error);
-                    // Ne pas faire échouer la requête si la notification échoue
+                    console.error('Error sending Discord notification:', error);
+                    // Don't fail the request if notification fails
                 }
             }
 
             res.status(201).json({
                 success: true,
-                message: 'Build déclaré avec succès',
+                message: 'Build declared successfully',
                 data: buildData
             });
 
         } catch {
             res.status(500).json({
-                error: 'Erreur interne du serveur lors de la déclaration du build'
+                error: 'Internal server error while declaring build'
             });
         }
     }
@@ -130,12 +133,12 @@ export class BuildsController implements Controller {
         }
 
         const channelIds = Config.notifications.builds.channelIds as string[];
-        
-        // Créer un embed Discord pour la notification
+
+        // Create Discord embed for notification
         const embed = new EmbedBuilder()
             .setTitle('🔨 New Build Available')
             .setDescription(buildData.message)
-            .setColor(0x00FF00) // Vert pour succès
+            .setColor(0x00FF00) // Green for success
             .addFields([
                 {
                     name: '📄 File',
@@ -144,7 +147,7 @@ export class BuildsController implements Controller {
                 },
                 {
                     name: '🔗 URL',
-                    value: `[Télécharger](${buildData.url})`,
+                    value: `[Download](${buildData.url})`,
                     inline: true
                 },
                 {
@@ -156,7 +159,7 @@ export class BuildsController implements Controller {
             .setTimestamp()
             .setFooter({ text: 'Build Notification System' });
 
-        // Envoyer le message via le shardManager
+        // Send message via shardManager
         for(const channelId of channelIds) {
             await this.shardManager.broadcastEval(
                 (client, { channelId, embedData }) => {

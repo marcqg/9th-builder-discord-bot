@@ -61,7 +61,7 @@ describe('BuildsController', () => {
             expect(mockRes.status).toHaveBeenCalledWith(201);
             expect(mockRes.json).toHaveBeenCalledWith({
                 success: true,
-                message: 'Build déclaré avec succès',
+                message: 'Build declared successfully',
                 data: expect.objectContaining({
                     id: expect.any(Number),
                     url: validBody.url,
@@ -86,7 +86,7 @@ describe('BuildsController', () => {
             expect(mockRes.status).toHaveBeenCalledWith(201);
             expect(mockRes.json).toHaveBeenCalledWith({
                 success: true,
-                message: 'Build déclaré avec succès',
+                message: 'Build declared successfully',
                 data: expect.objectContaining({
                     url: 'https://example.com/build.zip',
                     message: 'Test build message',
@@ -107,7 +107,7 @@ describe('BuildsController', () => {
 
             expect(mockRes.status).toHaveBeenCalledWith(400);
             expect(mockRes.json).toHaveBeenCalledWith({
-                error: 'Le paramètre "url" est requis et doit être une chaîne de caractères'
+                error: 'The "url" parameter is required and must be a string'
             });
         });
 
@@ -121,7 +121,7 @@ describe('BuildsController', () => {
 
             expect(mockRes.status).toHaveBeenCalledWith(400);
             expect(mockRes.json).toHaveBeenCalledWith({
-                error: 'Le paramètre "message" est requis et doit être une chaîne de caractères'
+                error: 'The "message" parameter is required and must be a string'
             });
         });
 
@@ -135,7 +135,7 @@ describe('BuildsController', () => {
 
             expect(mockRes.status).toHaveBeenCalledWith(400);
             expect(mockRes.json).toHaveBeenCalledWith({
-                error: 'Le paramètre "filename" est requis et doit être une chaîne de caractères'
+                error: 'The "filename" parameter is required and must be a string'
             });
         });
 
@@ -150,7 +150,7 @@ describe('BuildsController', () => {
 
             expect(mockRes.status).toHaveBeenCalledWith(400);
             expect(mockRes.json).toHaveBeenCalledWith({
-                error: 'Le paramètre "url" est requis et doit être une chaîne de caractères'
+                error: 'The "url" parameter is required and must be a string'
             });
         });
 
@@ -165,7 +165,7 @@ describe('BuildsController', () => {
 
             expect(mockRes.status).toHaveBeenCalledWith(400);
             expect(mockRes.json).toHaveBeenCalledWith({
-                error: 'Le paramètre "message" est requis et doit être une chaîne de caractères'
+                error: 'The "message" parameter is required and must be a string'
             });
         });
 
@@ -180,7 +180,7 @@ describe('BuildsController', () => {
 
             expect(mockRes.status).toHaveBeenCalledWith(400);
             expect(mockRes.json).toHaveBeenCalledWith({
-                error: 'Le paramètre "filename" est requis et doit être une chaîne de caractères'
+                error: 'The "filename" parameter is required and must be a string'
             });
         });
 
@@ -195,7 +195,7 @@ describe('BuildsController', () => {
 
             expect(mockRes.status).toHaveBeenCalledWith(400);
             expect(mockRes.json).toHaveBeenCalledWith({
-                error: 'Le paramètre "url" doit être une URL valide'
+                error: 'The "url" parameter must be a valid URL'
             });
         });
 
@@ -210,7 +210,7 @@ describe('BuildsController', () => {
 
             expect(mockRes.status).toHaveBeenCalledWith(400);
             expect(mockRes.json).toHaveBeenCalledWith({
-                error: 'Le paramètre "url" est requis et doit être une chaîne de caractères'
+                error: 'The "url" parameter is required and must be a string'
             });
         });
 
@@ -225,7 +225,7 @@ describe('BuildsController', () => {
 
             expect(mockRes.status).toHaveBeenCalledWith(400);
             expect(mockRes.json).toHaveBeenCalledWith({
-                error: 'Le paramètre "message" est requis et doit être une chaîne de caractères'
+                error: 'The "message" parameter is required and must be a string'
             });
         });
 
@@ -240,7 +240,7 @@ describe('BuildsController', () => {
 
             expect(mockRes.status).toHaveBeenCalledWith(400);
             expect(mockRes.json).toHaveBeenCalledWith({
-                error: 'Le paramètre "filename" est requis et doit être une chaîne de caractères'
+                error: 'The "filename" parameter is required and must be a string'
             });
         });
     });
@@ -313,7 +313,7 @@ describe('BuildsController', () => {
 
             expect(mockRes.status).toHaveBeenCalledWith(500);
             expect(mockRes.json).toHaveBeenCalledWith({
-                error: 'Erreur interne du serveur lors de la déclaration du build'
+                error: 'Internal server error while declaring build'
             });
 
             // Restore original Date.now
@@ -332,7 +332,7 @@ describe('BuildsController', () => {
 
             expect(mockRes.status).toHaveBeenCalledWith(400);
             expect(mockRes.json).toHaveBeenCalledWith({
-                error: 'Le paramètre "url" doit être une URL valide'
+                error: 'The "url" parameter must be a valid URL'
             });
         });
     });
