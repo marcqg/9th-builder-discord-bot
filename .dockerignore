@@ -1,11 +1,34 @@
-# Folders
+# Dossiers de développement
 /.cache
 /.git
+/.github
+/.idea
+/.vscode
 /dist
 /docs
 /misc
 /node_modules
 /temp
+/tests
 
-# Files
+# Fichiers de configuration de développement
 /npm-debug.log
+/.dockerignore
+/.gitbook.yaml
+/.gitignore
+/.nvmrc
+/.prettierignore
+/.prettierrc.json
+/eslint.config.mjs
+/LEGAL.md
+/LICENSE
+/README.md
+/tsconfig.test.json
+/vitest.config.ts
+/scaleway.txt
+
+# Fichiers de configuration exemple (ne pas déployer)
+/config/*.example.json
+
+# Scripts de développement
+/scripts
