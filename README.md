@@ -88,6 +88,16 @@ A welcome message is sent to the server and owner when the bot is added.
         - This is so Discord knows what your commands look like.
         - It may take up to an hour for command changes to appear.
 
+## Deployment
+
+### Automatic Deployment on Scaleway
+
+This project is configured for automatic deployment on Scaleway. Every push to the `main` branch triggers:
+
+1. Docker image build
+2. Push to Scaleway Container Registry
+3. Automatic deployment to Scaleway Container
+
 ## Start Scripts
 
 You can run the bot in multiple modes:
