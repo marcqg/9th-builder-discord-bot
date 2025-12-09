@@ -224,6 +224,7 @@
             "Administrator": "Administrator",
             "AttachFiles": "Attach Files",
             "BanMembers": "Ban Members",
+            "BypassSlowmode": "By pass Slow mode",
             "ChangeNickname": "Change Nickname",
             "Connect": "Connect",
             "CreateEvents": "Create Events",
