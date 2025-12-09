@@ -3,9 +3,11 @@ import { Request, Response, Router } from 'express';
 import { createRequire } from 'node:module';
 
 import { Controller } from './index.js';
+import { Logger } from '../services';
 
 const require = createRequire(import.meta.url);
 let Config = require('../../config/config.json');
+let Logs = require('../../lang/logs.json');
 
 export interface BuildDeclaration {
     url: string;
@@ -18,7 +20,7 @@ export class BuildsController implements Controller {
     public router: Router = Router();
     public authToken: string = Config.api.secret;
 
-    constructor(private shardManager?: ShardingManager) {}
+    constructor(private shardManager: ShardingManager) {}
 
     public register(): void {
         /**
@@ -105,13 +107,28 @@ export class BuildsController implements Controller {
             };
 
             // Send Discord notification if configured
-            if (Config.notifications?.builds?.enabled && this.shardManager) {
+            if (Config.notifications.builds.enabled) {
+                if (!Config.notifications.builds.channelIds) {
+                    Logger.error(Logs.error.buildNotificationNoChannelIds);
+                    res.status(503).json({
+                        error: Logs.error.buildNotificationNoChannelIds,
+                    });
+                    return;
+                }
+
                 try {
                     await this.sendDiscordNotification(buildData);
                 } catch (error) {
                     console.error('Error sending Discord notification:', error);
                     // Don't fail the request if notification fails
                 }
+            }
+            else {
+                Logger.error(Logs.error.buildNotificationDisabled)
+                res.status(503).json({
+                    error: Logs.error.buildNotificationDisabled,
+                });
+                return;
             }
 
             res.status(201).json({
@@ -128,10 +145,6 @@ export class BuildsController implements Controller {
     }
 
     private async sendDiscordNotification(buildData: any): Promise<void> {
-        if (!this.shardManager || !Config.notifications?.builds?.channelIds) {
-            return;
-        }
-
         const channelIds = Config.notifications.builds.channelIds as string[];
 
         // Create Discord embed for notification

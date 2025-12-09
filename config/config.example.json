@@ -34,7 +34,7 @@
     "notifications": {
       "builds": {
         "enabled": true,
-        "channelIs": ["<DISCORD_NOTIFICATION_CHANNEL_ID>"]
+        "channelIds": ["<DISCORD_NOTIFICATION_CHANNEL_ID>"]
       }
     },
     "sharding": {
