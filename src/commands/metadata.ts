@@ -1,5 +1,4 @@
 import {
-    ApplicationCommandOptionType,
     ApplicationCommandType,
     PermissionFlagsBits,
     PermissionsBitField,
@@ -69,37 +68,6 @@ export const ChatCommandMetadata: {
         description_localizations: Lang.getRefLocalizationMap('commandDescs.test'),
         dm_permission: true,
         default_member_permissions: undefined,
-    },
-    FORMAT_VALIDATOR: {
-        type: ApplicationCommandType.ChatInput,
-        name: Lang.getRef('chatCommands.formatValidator', Language.Default),
-        name_localizations: Lang.getRefLocalizationMap('chatCommands.formatValidator'),
-        description: Lang.getRef('commandDescs.formatValidator', Language.Default),
-        description_localizations: Lang.getRefLocalizationMap('commandDescs.formatValidator'),
-        dm_permission: false,
-        default_member_permissions: PermissionsBitField.resolve([
-            PermissionFlagsBits.ManageChannels,
-        ]).toString(),
-        options: [
-            {
-                ...Args.FORMAT_VALIDATOR_COMMAND,
-                required: true,
-            },
-            {
-                name: 'pattern',
-                description: Lang.getRef('argDescs.formatValidatorPattern', Language.Default),
-                description_localizations: Lang.getRefLocalizationMap('argDescs.formatValidatorPattern'),
-                type: ApplicationCommandOptionType.String,
-                required: false,
-            },
-            {
-                name: 'error_message',
-                description: Lang.getRef('argDescs.formatValidatorErrorMessage', Language.Default),
-                description_localizations: Lang.getRefLocalizationMap('argDescs.formatValidatorErrorMessage'),
-                type: ApplicationCommandOptionType.String,
-                required: false,
-            },
-        ],
     },
 };
 

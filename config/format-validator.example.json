@@ -1,9 +1,0 @@
-{
-    "formatRules": [
-        {
-            "channelId": "CHANNEL_ID_HERE",
-            "pattern": "^\\[.+\\] .+$",
-            "errorMessage": "Votre message ne suit pas le format requis. Les messages dans ce channel doivent commencer par un texte entre crochets, par exemple: [Sujet] Mon message"
-        }
-    ]
-}
