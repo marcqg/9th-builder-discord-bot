@@ -19,7 +19,7 @@ export class Manager {
 
         let shardList = this.shardManager.shardList as number[];
 
-        //try {
+        try {
             Logger.info(
                 Logs.info.managerSpawningShards
                     .replaceAll('{SHARD_COUNT}', shardList.length.toLocaleString())
@@ -31,16 +31,16 @@ export class Manager {
                 timeout: Config.sharding.spawnTimeout * 1000,
             });
             Logger.info(Logs.info.managerAllShardsSpawned);
-        //} catch (error) {
-        //    Logger.error(Logs.error.managerSpawningShards, error);
-        //    return;
-        //}
-        //
-        // if (Debug.dummyMode.enabled) {
-        //     return;
-        // }
-        //
-        // this.jobService.start();
+        } catch (error) {
+           Logger.error(Logs.error.managerSpawningShards, error);
+           return;
+        }
+
+        if (Debug.dummyMode.enabled) {
+            return;
+        }
+
+        this.jobService.start();
     }
 
     private registerListeners(): void {
