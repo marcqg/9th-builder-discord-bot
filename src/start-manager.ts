@@ -60,14 +60,14 @@ async function start(): Promise<void> {
     });
 
     shardManager.on('shardCreate', async (shard) => {
-        console.log(`✅ Shard ${shard.id} créé`);
+        Logger.info(`✅ Shard ${shard.id} créé`);
 
         shard.on('error', error => {
-            console.error(`❌ Erreur Shard ${shard.id}:`, error);
+            Logger.error(`❌ Erreur Shard ${shard.id}:`, error);
         });
 
         shard.on('death', () => {
-            console.warn(`⚠️ Shard ${shard.id} mort`);
+            Logger.warn(`⚠️ Shard ${shard.id} mort`);
         });
     })
 
