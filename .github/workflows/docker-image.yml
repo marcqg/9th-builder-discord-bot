@@ -40,17 +40,9 @@ jobs:
       run: docker build . --file Dockerfile --tag "${{ env.SCALEWAY_CONTAINER_URL }}/${{ env.SCALEWAY_CONTAINER_ID }}/${{ env.CONTAINER_NAME }}:latest" --platform=linux/amd64
     - name: Push to Container Registry
       run: docker push "${{ env.SCALEWAY_CONTAINER_URL }}/${{ env.SCALEWAY_CONTAINER_ID }}/${{ env.CONTAINER_NAME }}:latest"
-    
-  deploy:
-    environment: production
-
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Redeploy Scaleway Container
-        run: |          
-          curl -X POST \
-            -H "X-Auth-Token: ${{ secrets.SCALEWAY_TOKEN }}" \
-            "https://api.scaleway.com/containers/v1beta1/regions/${{ env.SCALEWAY_DEFAULT_REGION }}/containers/${{ env.SCALEWAY_CONTAINER_UUID }}/deploy" \
-            -d "{}"
+    - name: Redeploy Scaleway Container
+      run: |          
+        curl -X POST \
+          -H "X-Auth-Token: ${{ secrets.SCALEWAY_TOKEN }}" \
+          "https://api.scaleway.com/containers/v1beta1/regions/${{ env.SCALEWAY_DEFAULT_REGION }}/containers/${{ env.SCALEWAY_CONTAINER_UUID }}/deploy" \
+          -d "{}"
